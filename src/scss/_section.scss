@@ -1,0 +1,40 @@
+/**
+section style
+General spacing component multiple modifiers for any application
+e.g. <div class="section section--p-b-0">...</div>
+**/
+@import "./imports/_imports.scss";
+
+$section-padding: 16px;
+
+.section {
+  --section-padding: #{$section-padding};
+  padding: var(--section-padding, $section-padding) #{$section-padding};
+
+  @media screen and (min-width: $bp-x-large-min) {
+    padding: calc(var(--section-padding) * 2) #{$section-padding};
+  }
+}
+
+.section--medium {
+  --section-padding: #{$section-padding * 2};
+}
+
+.section--large {
+  --section-padding: #{$section-padding * 3};
+}
+
+.section--x-large {
+  --section-padding: #{$section-padding * 4};
+}
+
+/** Section Padding Bottom 0 **/
+.section--p-b-0 {
+  padding-bottom: 0;
+}
+
+/** Section Padding Top 0 **/
+.section--p-t-0 {
+  padding-top: 0;
+}
+

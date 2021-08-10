@@ -1,0 +1,19 @@
+/* General Breakpoints
+
+ to be used with min-width (preferred over max-width to be "mobile first")
+ @media (min-width: $bp-small-min) { ... }
+*/
+
+/*Gutter value controls the spacing inside and outside of containers*/
+$gutter: 1rem;
+$max-width: 1200px; /*translated to a :root variable in _variables.scss*/
+$gutter-bleed: $gutter * 2;
+$content-area: calc( $max-width - $gutter-bleed);
+$bp-x-small-min: 400px;
+$bp-small-min: 680px;
+$bp-medium-min: 780px;
+$bp-large-min: 910px;
+$bp-x-large-min: $max-width;
+
+$grid-col-gap: $gutter;
+$grid-row-gap: $gutter;

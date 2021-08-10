@@ -1,0 +1,19 @@
+/** Colors **/
+$c-neon: #c4d600;
+$c-brand-teal: #18819d;
+$c-brand-blue: #253746;
+$c-blue-shade: #f2f5f6;
+$c-error: #d23a08;
+$c-hover: #607995;
+$c-white: #ffffff;
+$c-black: #152c3d;
+
+/** Colors Vars **/
+$var-neon: var(--c-, $c-neon);
+$var-brand-teal: var(--c-brand-teal, $c-brand-teal);
+$var-brand-blue: var(--c-brand-blue, $c-brand-blue);
+$var-blue-shade: var(--c-blue-shade, $c-blue-shade);
+$var-error: var(--c-error, $c-error);
+$var-hover: var(--c-hover, $c-hover);
+$var-text-light: var(--c-white, $c-white);
+$var-text-dark: var(--c-black, $c-black);

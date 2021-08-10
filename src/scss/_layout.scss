@@ -1,0 +1,28 @@
+@import "./imports/_imports.scss";
+
+.layout {
+  display: grid;
+  grid-template-columns:  1fr;
+  grid-template-rows: auto 1fr auto;
+  justify-content: center;
+  min-height: 100vh;
+  // grid-gap: $grid-col-gap $grid-row-gap;
+}
+
+
+.layout__main {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto;
+  // grid-gap: $grid-col-gap $grid-row-gap;
+  
+  @media (min-width: $bp-medium-min) {
+    grid-template-columns: 1fr 2fr;
+  }
+}
+
+
+.layout--dark {
+  color: $var-text-light;
+  background-color: $var-brand-blue;
+}
