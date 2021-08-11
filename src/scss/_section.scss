@@ -1,39 +1,60 @@
 /**
 section style
 General spacing component multiple modifiers for any application
-e.g. <div class="section section--p-b-0">...</div>
+e.g. <div className="section section--p-b-0">...</div>
 **/
 @import "./imports/_imports.scss";
 
+/**
+"--spacing-xxx-small": "0.125rem",
+"--spacing-xx-small": "0.25rem",
+"--spacing-x-small": "0.5rem",
+"--spacing-small": "0.75rem",
+"--spacing-medium": "1rem",
+"--spacing-large": "1.25rem",
+"--spacing-x-large": "1.75rem",
+"--spacing-xx-large": "2.25rem",
+"--spacing-xxx-large": "3rem",
+"--spacing-xxxx-large": "4.5rem",
+**/
 .section {
-  padding: var(--calculated-padding) var(--calculated-padding, 1rem);
+  padding: var(--spacing-medium) var(--spacing-medium);
+  font-family: var(--font-serif);
+  font-weight: var(--font-weight-normal);
 
   @media screen and (min-width: $bp-x-large-min) {
-    padding: var(--calculated-padding-md) var(--calculated-padding, 1rem);
+    padding: var(--spacing-medium) var(--spacing-medium);
+  }
+}
+
+.section--sm {
+  padding: var(--spacing-small) var(--spacing-medium);
+  @media screen and (min-width: $bp-x-large-min) {
+    padding: var(--spacing-medium) var(--spacing-medium);
   }
 }
 
 .section--medium {
-  padding: var(--calculated-padding-md) var(--calculated-padding, 1rem);
+  padding: var(--spacing-medium) var(--spacing-medium);
 
   @media screen and (min-width: $bp-x-large-min) {
-    padding: var(--calculated-padding-l) var(--calculated-padding, 1rem);
+    padding: var(--spacing-large) var(--spacing-medium);
   }
 }
 
 .section--large {
-  padding: var(--calculated-padding-l) var(--calculated-padding, 1rem);
+  padding: var(--spacing-large) var(--spacing-medium);
 
   @media screen and (min-width: $bp-x-large-min) {
-    padding: var(--calculated-padding-xl) var(--calculated-padding, 1rem);
+    padding: var(--spacing-x-large) var(--spacing-medium);
   }
 }
 
 .section--x-large {
-  padding: var(--calculated-padding-xl) var(--calculated-padding, 1rem);
+  padding: var(--spacing-x-large) var(--spacing-medium);
 
   @media screen and (min-width: $bp-x-large-min) {
-    padding: var(--calculated-padding-xl) var(--calculated-padding, 1rem);
+    padding: var(--spacing-xx-large) var(--spacing-medium);
   }
 }
 

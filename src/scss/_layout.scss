@@ -6,14 +6,14 @@
   grid-template-rows: auto 1fr auto;
   justify-content: center;
   min-height: 100vh;
-  grid-gap: var(--calculated-gutter);
+  grid-gap: var(--grid-gutter);
 }
 
 .layout__main {
   display: grid;
   grid-template-columns: auto;
   grid-template-rows: auto;
-  grid-gap: var(--calculated-gutter);
+  grid-gap: var(--grid-gutter);
 
   @media (min-width: $bp-medium-min) {
     grid-template-columns: 1fr 2fr;

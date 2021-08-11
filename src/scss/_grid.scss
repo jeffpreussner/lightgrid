@@ -1,6 +1,6 @@
 /**
 Grid layout for component content
-<div class="grid">
+<div className="grid">
     <div>content will scale to fit container evenly</div>
 </div>
 
@@ -17,10 +17,10 @@ TODO: remove
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: auto;
-  max-width: $max-width;
+
   margin: 0 auto;
-  grid-gap: var(--calculated-gutter);
-  margin-top: var(--calculated-gutter);
+  grid-gap: var(--grid-gutter);
+  margin-top: var(--grid-gutter);
 
   &:first-child {
     margin-top: 0;
