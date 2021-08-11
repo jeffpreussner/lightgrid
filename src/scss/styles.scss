@@ -1,8 +1,44 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap");
 @import "./_layout.scss";
 @import "./_grid.scss";
 @import "./_section.scss";
 
-html {font-size: clamp(1rem, 1.5vw, 2rem);}
+// :root{
+//   --calculated-padding:10px;
+//   --calculated-padding-md:20px;
+//   --calculated-padding-l:20px;
+//   --calculated-padding-xl:40px;
+//   --calculated-gutter:50px;
+// }
+
+html {
+  font-size: clamp(1rem, 1.5vw, 2rem);
+  font-family: "Poppins", sans-serif;
+  background: #161618;
+  color: white;
+}
+
+form {
+  margin-bottom: 1rem;
+  display: block;
+}
+
+form label {
+  display: block;
+  font-size: 0.8em;
+  margin-bottom: 1em;
+}
+
+form input {
+  display: block;
+  margin: 0.8em 0 1.2em;
+  padding: 1em;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 1rem;
+  border: 0;
+  color: white;
+  font-weight: bold;
+}
 
 nav {
   display: flex;
@@ -10,16 +46,23 @@ nav {
   align-items: center;
 }
 
-li{
+li {
   list-style: "- ";
 }
 
-h1,h2,h3,h4,h5,h6,p,li {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+li {
   margin-bottom: 1em;
   line-height: 1.2;
 }
 
 .section {
-  box-shadow: inset 0px 0px 0px 1px rgba(0,0,0,0.2);
-  background: #eee;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 1rem;
 }

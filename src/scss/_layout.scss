@@ -2,25 +2,23 @@
 
 .layout {
   display: grid;
-  grid-template-columns:  1fr;
+  grid-template-columns: 1fr;
   grid-template-rows: auto 1fr auto;
   justify-content: center;
   min-height: 100vh;
-  // grid-gap: $grid-col-gap $grid-row-gap;
+  grid-gap: var(--calculated-gutter);
 }
-
 
 .layout__main {
   display: grid;
   grid-template-columns: auto;
   grid-template-rows: auto;
-  // grid-gap: $grid-col-gap $grid-row-gap;
-  
+  grid-gap: var(--calculated-gutter);
+
   @media (min-width: $bp-medium-min) {
     grid-template-columns: 1fr 2fr;
   }
 }
-
 
 .layout--dark {
   color: $var-text-light;

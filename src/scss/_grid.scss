@@ -19,14 +19,16 @@ TODO: remove
   grid-template-rows: auto;
   max-width: $max-width;
   margin: 0 auto;
-  // grid-gap: $grid-col-gap $grid-row-gap;
-  // margin-top:$grid-row-gap;
-  
-  &:first-child{margin-top: 0}
+  grid-gap: var(--calculated-gutter);
+  margin-top: var(--calculated-gutter);
+
+  &:first-child {
+    margin-top: 0;
+  }
+
   @media (min-width: $bp-medium-min) {
     grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
   }
-
 
   /** maintain grid on mobile **/
   &.grid--sm {
@@ -41,15 +43,15 @@ TODO: remove
     justify-content: flex-end;
   }
 
-  &.grid--bleed{
+  &.grid--bleed {
     max-width: 100%;
   }
-  &.grid--70-30{
-      @media (min-width: $bp-medium-min) {
-        grid-template-columns: 2fr 1fr;
-      }
+  &.grid--70-30 {
+    @media (min-width: $bp-medium-min) {
+      grid-template-columns: 2fr 1fr;
+    }
   }
-  &.grid--30-70{
+  &.grid--30-70 {
     @media (min-width: $bp-medium-min) {
       grid-template-columns: 1fr 2fr;
     }

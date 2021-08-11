@@ -5,27 +5,36 @@ e.g. <div class="section section--p-b-0">...</div>
 **/
 @import "./imports/_imports.scss";
 
-$section-padding: 16px;
-
 .section {
-  --section-padding: #{$section-padding};
-  padding: var(--section-padding, $section-padding) #{$section-padding};
+  padding: var(--calculated-padding) var(--calculated-padding, 1rem);
 
   @media screen and (min-width: $bp-x-large-min) {
-    padding: calc(var(--section-padding) * 2) #{$section-padding};
+    padding: var(--calculated-padding-md) var(--calculated-padding, 1rem);
   }
 }
 
 .section--medium {
-  --section-padding: #{$section-padding * 2};
+  padding: var(--calculated-padding-md) var(--calculated-padding, 1rem);
+
+  @media screen and (min-width: $bp-x-large-min) {
+    padding: var(--calculated-padding-l) var(--calculated-padding, 1rem);
+  }
 }
 
 .section--large {
-  --section-padding: #{$section-padding * 3};
+  padding: var(--calculated-padding-l) var(--calculated-padding, 1rem);
+
+  @media screen and (min-width: $bp-x-large-min) {
+    padding: var(--calculated-padding-xl) var(--calculated-padding, 1rem);
+  }
 }
 
 .section--x-large {
-  --section-padding: #{$section-padding * 4};
+  padding: var(--calculated-padding-xl) var(--calculated-padding, 1rem);
+
+  @media screen and (min-width: $bp-x-large-min) {
+    padding: var(--calculated-padding-xl) var(--calculated-padding, 1rem);
+  }
 }
 
 /** Section Padding Bottom 0 **/
@@ -37,4 +46,3 @@ $section-padding: 16px;
 .section--p-t-0 {
   padding-top: 0;
 }
-
