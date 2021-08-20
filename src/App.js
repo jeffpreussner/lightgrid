@@ -1,269 +1,117 @@
-import { useState } from "react";
+import { useState, useEffect, useReducer } from "react";
 import "./scss/styles.scss";
 import * as R from "ramda";
+import vars from "./vars";
+import slugify from "slugify";
+import AddField from "./components/AddField/AddField";
+import Btn from "./components/Btn/Btn";
+// import { Button } from "carbon-components-react";
 
 export default function App() {
-  const [show, setShow] = useState(false);
   const [output, setOutput] = useState(":root{}");
-  const [styles, setStyles] = useState({
-    /* src/styles/base.css */
-    "--grid-gutter": "1rem",
-    "--spacing-xxx-small": "0.125rem",
-    "--spacing-xx-small": "0.25rem",
-    "--spacing-x-small": "0.5rem",
-    "--spacing-small": "0.75rem",
-    "--spacing-medium": "1rem",
-    "--spacing-large": "1.25rem",
-    "--spacing-x-large": "1.75rem",
-    "--spacing-xx-large": "2.25rem",
-    "--spacing-xxx-large": "3rem",
-    "--spacing-xxxx-large": "4.5rem",
-    "--color-primary-50": "#f0f9ff",
-    "--color-primary-100": "#e0f2fe",
-    "--color-primary-200": "#bae6fd",
-    "--color-primary-300": "#7dd3fc",
-    "--color-primary-400": "#38bdf8",
-    "--color-primary-500": "#0ea5e9",
-    "--color-primary-600": "#0284c7",
-    "--color-primary-700": "#0369a1",
-    "--color-primary-800": "#075985",
-    "--color-primary-900": "#0c4a6e",
-    "--color-primary-950": "#082e45",
-    "--color-black": "#000",
-    "--color-white": "#fff",
-    "--color-gray-50": "#f9fafb",
-    "--color-gray-100": "#f3f4f6",
-    "--color-gray-200": "#e5e7eb",
-    "--color-gray-300": "#d1d5db",
-    "--color-gray-400": "#9ca3af",
-    "--color-gray-500": "#6b7280",
-    "--color-gray-600": "#4b5563",
-    "--color-gray-700": "#374151",
-    "--color-gray-800": "#1f2937",
-    "--color-gray-900": "#111827",
-    "--color-gray-950": "#0d131e",
-    "--color-primary-text": "var(--color-white)",
-    "--color-success-50": "#f0fdf4",
-    "--color-success-100": "#dcfce7",
-    "--color-success-200": "#bbf7d0",
-    "--color-success-300": "#86efac",
-    "--color-success-400": "#4ade80",
-    "--color-success-500": "#22c55e",
-    "--color-success-600": "#16a34a",
-    "--color-success-700": "#15803d",
-    "--color-success-800": "#166534",
-    "--color-success-900": "#14532d",
-    "--color-success-950": "#0d381e",
-    "--color-success-text": "var(--color-white)",
-    "--color-info-50": "#f9fafb",
-    "--color-info-100": "#f3f4f6",
-    "--color-info-200": "#e5e7eb",
-    "--color-info-300": "#d1d5db",
-    "--color-info-400": "#9ca3af",
-    "--color-info-500": "#6b7280",
-    "--color-info-600": "#4b5563",
-    "--color-info-700": "#374151",
-    "--color-info-800": "#1f2937",
-    "--color-info-900": "#111827",
-    "--color-info-950": "#0d131e",
-    "--color-info-text": "var(--color-white)",
-    "--color-warning-50": "#fffbeb",
-    "--color-warning-100": "#fef3c7",
-    "--color-warning-200": "#fde68a",
-    "--color-warning-300": "#fcd34d",
-    "--color-warning-400": "#fbbf24",
-    "--color-warning-500": "#f59e0b",
-    "--color-warning-600": "#d97706",
-    "--color-warning-700": "#b45309",
-    "--color-warning-800": "#92400e",
-    "--color-warning-900": "#78350f",
-    "--color-warning-950": "#4d220a",
-    "--color-warning-text": "var(--color-white)",
-    "--color-danger-50": "#fef2f2",
-    "--color-danger-100": "#fee2e2",
-    "--color-danger-200": "#fecaca",
-    "--color-danger-300": "#fca5a5",
-    "--color-danger-400": "#f87171",
-    "--color-danger-500": "#ef4444",
-    "--color-danger-600": "#dc2626",
-    "--color-danger-700": "#b91c1c",
-    "--color-danger-800": "#991b1b",
-    "--color-danger-900": "#7f1d1d",
-    "--color-danger-950": "#481111",
-    "--color-danger-text": "var(--color-white)",
-    "--border-radius-small": "0.125rem",
-    "--border-radius-medium": "0.25rem",
-    "--border-radius-large": "0.5rem",
-    "--border-radius-x-large": "1rem",
-    "--border-radius-circle": "50%",
-    "--border-radius-pill": "9999px",
-    "--shadow-x-small": "0 1px 0 #0d131e0d",
-    "--shadow-small": "0 1px 2px #0d131e1a",
-    "--shadow-medium": "0 2px 4px #0d131e1a",
-    "--shadow-large": "0 2px 8px #0d131e1a",
-    "--shadow-x-large": "0 4px 16px #0d131e1a",
-    "--transition-x-slow": "1000ms",
-    "--transition-slow": "500ms",
-    "--transition-medium": "250ms",
-    "--transition-fast": "150ms",
-    "--transition-x-fast": "50ms",
-    "--font-mono":
-      'SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace',
-    "--font-sans":
-      '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
-    "--font-serif": 'Georgia, "Times New Roman", serif',
-    "--font-size-xx-small": "0.625rem",
-    "--font-size-x-small": "0.75rem",
-    "--font-size-small": "0.875rem",
-    "--font-size-medium": "1rem",
-    "--font-size-large": "1.25rem",
-    "--font-size-x-large": "1.5rem",
-    "--font-size-xx-large": "2.25rem",
-    "--font-size-xxx-large": "3rem",
-    "--font-size-xxxx-large": "4.5rem",
-    "--font-weight-light": "300",
-    "--font-weight-normal": "400",
-    "--font-weight-semibold": "500",
-    "--font-weight-bold": "700",
-    "--letter-spacing-dense": "-0.015em",
-    "--letter-spacing-normal": "normal",
-    "--letter-spacing-loose": "0.075em",
-    "--line-height-dense": "1.4",
-    "--line-height-normal": "1.8",
-    "--line-height-loose": "2.2",
-    "--focus-ring-color-primary": "#0ea5e954",
-    "--focus-ring-color-success": "#22c55e54",
-    "--focus-ring-color-info": "#6b728054",
-    "--focus-ring-color-warning": "#f59e0b54",
-    "--focus-ring-color-danger": "#ef444454",
-    "--focus-ring-width": "3px",
-    "--button-font-size-small": "var(--font-size-x-small)",
-    "--button-font-size-medium": "var(--font-size-small)",
-    "--button-font-size-large": "var(--font-size-medium)",
-    "--input-height-small": "1.875rem",
-    "--input-height-medium": "2.5rem",
-    "--input-height-large": "3.125rem",
-    "--input-background-color": "var(--color-white)",
-    "--input-background-color-hover": "var(--color-white)",
-    "--input-background-color-focus": "var(--color-white)",
-    "--input-background-color-disabled": "var(--color-gray-100)",
-    "--input-border-color": "var(--color-gray-300)",
-    "--input-border-color-hover": "var(--color-gray-400)",
-    "--input-border-color-focus": "var(--color-primary-500)",
-    "--input-border-color-disabled": "var(--color-gray-300)",
-    "--input-border-width": "1px",
-    "--input-border-radius-small": "var(--border-radius-medium)",
-    "--input-border-radius-medium": "var(--border-radius-medium)",
-    "--input-border-radius-large": "var(--border-radius-medium)",
-    "--input-font-family": "var(--font-sans)",
-    "--input-font-weight": "var(--font-weight-normal)",
-    "--input-font-size-small": "var(--font-size-small)",
-    "--input-font-size-medium": "var(--font-size-medium)",
-    "--input-font-size-large": "var(--font-size-large)",
-    "--input-letter-spacing": "var(--letter-spacing-normal)",
-    "--input-color": "var(--color-gray-700)",
-    "--input-color-hover": "var(--color-gray-700)",
-    "--input-color-focus": "var(--color-gray-700)",
-    "--input-color-disabled": "var(--color-gray-900)",
-    "--input-icon-color": "var(--color-gray-400)",
-    "--input-icon-color-hover": "var(--color-gray-600)",
-    "--input-icon-color-focus": "var(--color-gray-600)",
-    "--input-placeholder-color": "var(--color-gray-400)",
-    "--input-placeholder-color-disabled": "var(--color-gray-600)",
-    "--input-spacing-small": "var(--spacing-small)",
-    "--input-spacing-medium": "var(--spacing-medium)",
-    "--input-spacing-large": "var(--spacing-large)",
-    "--input-label-font-size-small": "var(--font-size-small)",
-    "--input-label-font-size-medium": "var(--font-size-medium)",
-    "--input-label-font-size-large": "var(--font-size-large)",
-    "--input-label-color": "inherit",
-    "--input-help-text-font-size-small": "var(--font-size-x-small)",
-    "--input-help-text-font-size-medium": "var(--font-size-small)",
-    "--input-help-text-font-size-large": "var(--font-size-medium)",
-    "--input-help-text-color": "var(--color-gray-400)",
-    "--toggle-size": "1rem",
-    "--overlay-background-color": "#37415180",
-    "--panel-background-color": "var(--color-white)",
-    "--panel-border-color": "var(--color-gray-200)",
-    "--tooltip-border-radius": "var(--border-radius-medium)",
-    "--tooltip-background-color": "var(--color-gray-900)",
-    "--tooltip-color": "var(--color-white)",
-    "--tooltip-font-family": "var(--font-sans)",
-    "--tooltip-font-weight": "var(--font-weight-normal)",
-    "--tooltip-font-size": "var(--font-size-small)",
-    "--tooltip-line-height": "var(--line-height-dense)",
-    "--tooltip-padding": "var(--spacing-xx-small) var(--spacing-x-small)",
-    "--tooltip-arrow-size": "5px",
-    "--tooltip-arrow-start-end-offset": "8px",
-    "--z-index-drawer": "700",
-    "--z-index-dialog": "800",
-    "--z-index-dropdown": "900",
-    "--z-index-toast": "950",
-    "--z-index-tooltip": "1000",
+  const reducer = (prevState, updatedProperty) => ({
+    ...prevState,
+    ...updatedProperty,
   });
 
+  const [state, setState] = useReducer(reducer, {
+    codeVisible: false,
+    groupVisible: R.map((i) => ({ [i.id]: false }))(vars),
+    vars: vars,
+  });
+  console.log(state.vars);
+  //as a string
+  // const allVars = R.join(
+  //   "\n",
+  //   R.map(
+  //     // (i) => `${i.name}: ${i.value};`
+  //     (i) => ({ [i.name]: i.value })
+  //   )(R.compose(R.flatten, R.map(R.prop("data")))(state.vars))
+  // );
+
+  const allVars = R.reduce(
+    (a, b) => ({ ...a, ...b }),
+    {},
+    R.map((i) => ({ [i.name]: i.value }))(
+      R.compose(R.flatten, R.map(R.prop("data")))(state.vars)
+    )
+  );
+
+  const [inline, setInline] = useState(true);
   const updateVars = (e) => {
     e.preventDefault();
     const formData = R.compose(
       R.reject(R.propEq("id", "")),
       R.map((i) => ({ [i.id]: i.value }))
     )(e.target.elements);
-    const styles = R.reduce((a, b) => ({ ...a, ...b }), {}, formData);
-    setStyles(styles);
-
-    setOutput(":root{\n" + JSON.stringify(styles) + "\n}");
-
+    setInline(R.reduce((a, b) => ({ ...a, ...b }), {}, formData));
+    setOutput(":root{\n" + JSON.stringify(inline) + "\n}");
     // R.forEachObjIndexed((v,k)=> document.documentElement.style.setProperty(k, v), styles);
   };
 
-  const handleChange = (e, v) => {
-    e.preventDefault();
-    setStyles({ ...styles, [v]: e.target.value });
+  const handleChange = (g, n, v) => {
+    const vars = [...state.vars];
+    const groupIndex = R.findIndex(R.propEq("id", g))(vars);
+    const nameIndex = R.findIndex(R.propEq("name", n))(vars[groupIndex].data);
+    setState({
+      vars: R.assocPath(
+        [groupIndex, "data", nameIndex],
+        { name: n, value: v },
+        vars
+      ),
+    });
   };
 
-  return styles ? (
-    <div className="layout" style={styles}>
+  const handleAddFieldSubmit = (e, groupId, name, val) => {
+    e.stopPropagation();
+    e.preventDefault();
+    const index = R.findIndex(R.propEq("id", groupId))(state.vars);
+    const newVars = [...state.vars];
+    newVars[index] = setState({
+      var: {
+        ...state.vars,
+        [groupId]: {
+          data: {
+            ...state.vars[groupId].data,
+            [name]: val,
+          },
+        },
+      },
+    });
+    return false;
+  };
+
+  useEffect(() => {
+    console.log(state);
+  }, [state]);
+  return allVars ? (
+    <div className="layout" style={allVars}>
       <div className="layout__header">
         <div className="grid grid--bleed">
           <div className="section section--x-large">
-            <div className="component">
-              <h1>Barebones grid layout</h1>
-              <button
-                className="btn"
-                onClick={() => {
-                  setShow(true);
-                }}
-                style={{
-                  background: "var(--color-primary-300)",
-                  fontSize: "var(--button-font-size-large)",
-                  padding: "var(--spacing-medium",
-                  borderRadius: "var(--border-radius-large)",
-                }}
-              >
-                Show Output
-              </button>
-            </div>
+            <h1>Velir Theme Roller</h1>
+            <Btn
+              classes="btn--primary"
+              onClick={() => {
+                setState({ codeVisible: true });
+              }}
+            >
+              Show Output
+            </Btn>
           </div>
         </div>
       </div>
       <div
         className="section show"
-        style={{ display: !show ? "none" : "block" }}
+        style={{ display: !state.codeVisible ? "none" : "block" }}
       >
-        <button
-          className="btn"
+        <Btn
           onClick={() => {
-            setShow(false);
-          }}
-          style={{
-            background: "var(--color-primary-300)",
-            fontSize: "var(--button-font-size-large)",
-            padding: "var(--spacing-medium",
-            borderRadius: "var(--border-radius-large)",
+            setState({ codeVisible: false });
           }}
         >
           Hide Output
-        </button>
+        </Btn>
         <br /> <br />
         <code>{output}</code>
       </div>
@@ -271,31 +119,54 @@ export default function App() {
         <div className="layout__sidebar">
           <div className="section">
             <form onSubmit={(e) => updateVars(e)}>
-              {R.compose(
-                R.reject(R.isEmpty),
-                R.toPairs
-              )(styles).map((i) => (
-                <label htmlFor={i[0]}>
-                  {i[0]}
-                  <input
-                    id={i[0]}
-                    placeholder={i[0]}
-                    value={styles[i[0]]}
-                    onChange={(e) => handleChange(e, i[0])}
-                  />
-                </label>
+              {vars.map((group, i) => (
+                <div key={slugify(group.id)}>
+                  <Btn
+                    classes="btn--ui-accordion"
+                    id={`${slugify(group.name)}-toggle`}
+                    onClick={(e) =>
+                      setState({
+                        groupVisible: {
+                          [group.id]: !state.groupVisible[group.id],
+                        },
+                      })
+                    }
+                  >
+                    {group.name}
+                  </Btn>
+                  <ul
+                    id={`${slugify(group.name)}-dropdown`}
+                    style={{
+                      display: state.groupVisible[group.id] ? "block" : "none",
+                    }}
+                  >
+                    {group.data.map((i) => (
+                      <li>
+                        <label htmlFor={i.name}>
+                          {i.name}
+                          <input
+                            id={i.name}
+                            placeholder={i.name}
+                            onChange={(e) =>
+                              handleChange(group.id, i.name, e.target.value)
+                            }
+                          />
+                        </label>
+                      </li>
+                    ))}
+                    <li>
+                      <AddField
+                        btnText="Add variable"
+                        groupId={group.id}
+                        handleSubmit={handleAddFieldSubmit}
+                      />
+                    </li>
+                  </ul>
+                </div>
               ))}
-              <button
-                style={{
-                  background: "var(--color-primary-300)",
-                  fontSize: "var(--button-font-size-large)",
-                  padding: "var(--spacing-medium",
-                  borderRadius: "var(--border-radius-large)",
-                }}
-                type="submit"
-              >
+              <Btn classes="btn--primary" type="submit">
                 Update
-              </button>
+              </Btn>
             </form>
           </div>
         </div>
@@ -330,41 +201,48 @@ export default function App() {
             >
               <span style={{ fontSize: "var(--font-size-xx-small)" }}>Aa</span>
             </div>
-
             <div
               className="section"
               style={{
-                background: "var(--color-primary-200)",
-                color: "var(--color-black)",
+                background: "var(--color-primary-100)",
+                color: "var(--color-white)",
               }}
             >
               <span style={{ fontSize: "var(--font-size-x-small)" }}>Aa</span>
             </div>
-
             <div
               className="section"
               style={{
-                background: "var(--color-primary-400)",
+                background: "var(--color-primary-150)",
                 color: "var(--color-white)",
               }}
             >
               <span style={{ fontSize: "var(--font-size-small)" }}>Aa</span>
             </div>
-
+          </div>
+          <div className="grid">
             <div
               className="section"
               style={{
-                background: "var(--color-primary-600)",
+                background: "var(--color-secondary-50)",
                 color: "var(--color-white)",
               }}
             >
               <span style={{ fontSize: "var(--font-size-medium)" }}>Aa</span>
             </div>
-
             <div
               className="section"
               style={{
-                background: "var(--color-primary-900)",
+                background: "var(--color-secondary-100)",
+                color: "var(--color-white)",
+              }}
+            >
+              <span style={{ fontSize: "var(--font-size-medium)" }}>Aa</span>
+            </div>
+            <div
+              className="section"
+              style={{
+                background: "var(--color-secondary-150)",
                 color: "var(--color-white)",
               }}
             >
@@ -375,15 +253,12 @@ export default function App() {
             <div className="section">
               <span style={{ fontSize: "var(--font-size-x-large)" }}>Aa</span>
             </div>
-
             <div className="section">
               <span style={{ fontSize: "var(--font-size-xx-large)" }}>Aa</span>
             </div>
-
             <div className="section">
               <span style={{ fontSize: "var(--font-size-xxx-large)" }}>Aa</span>
             </div>
-
             <div className="section">
               <span style={{ fontSize: "var(--font-size-xxxx-large)" }}>
                 Aa

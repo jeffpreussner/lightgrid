@@ -1,0 +1,45 @@
+.btn {
+  padding: var(--spacing-x-small) var(--spacing-medium);
+  border-radius: var(--border-radius-medium);
+  border: 1px solid transparent;
+  font-size: 1rem;
+  margin-bottom: var(--spacing-x-small);
+}
+
+.btn--primary {
+  background: var(--color-primary-100);
+  color: var(--color-primary-text);
+  border: 1px solid var(--color-primary-100);
+
+  &:hover {
+    border: 1px solid var(--color-primary-150);
+    background: var(--color-primary-150);
+  }
+}
+
+.btn--white {
+  background: transparent;
+  color: var(--color-black);
+  border: 1px solid var(--color-white);
+
+  &:hover {
+    background: var(--color-white);
+  }
+}
+
+.btn--secondary {
+  background-color: var(--color-secondary-100);
+  color: var(--color-secondary-text);
+  &:hover {
+    background: var(--color-secondary-150);
+  }
+}
+
+.btn--ui-accordion {
+  background: none;
+  width: 100%;
+  border: 1px solid transparent;
+  border-bottom-color: var(--color-white);
+  text-align: left;
+  color: var(--color-white);
+}
